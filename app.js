@@ -4,6 +4,8 @@ const db = require("./models");
 var createError = require('http-errors');
 var indexRouter = require('./routes/index');
 
+require('dotenv').config();
+
 const app = express();
 
 global.__basedir = __dirname + "/..";
