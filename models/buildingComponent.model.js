@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Box = sequelize.define("box", {
+    const BuildingComponent = sequelize.define("buildingComponent", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -7,17 +7,6 @@ module.exports = (sequelize, Sequelize) => {
         },
         description: {
             type: Sequelize.STRING
-        },
-        buildingComponentId: {
-            type: Sequelize.INTEGER,
-        },
-        locationId: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
-        sizeId: {
-            type: Sequelize.INTEGER,
-            allowNull: false
         },
         rotateId: {
             type: Sequelize.INTEGER,
@@ -27,5 +16,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    return Box;
+    return BuildingComponent;
 };

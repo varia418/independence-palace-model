@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Box = sequelize.define("box", {
+    const Plane = sequelize.define("plane", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -27,5 +27,5 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
-    return Box;
+    return Plane;
 };

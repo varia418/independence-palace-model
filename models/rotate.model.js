@@ -1,31 +1,20 @@
 module.exports = (sequelize, Sequelize) => {
-    const Box = sequelize.define("box", {
+    const Rotate = sequelize.define("rotate", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        description: {
-            type: Sequelize.STRING
+        x: {
+            type: Sequelize.FLOAT,
         },
-        buildingComponentId: {
-            type: Sequelize.INTEGER,
+        y: {
+            type: Sequelize.FLOAT,
         },
-        locationId: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
-        sizeId: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
-        rotateId: {
-            type: Sequelize.INTEGER,
-        },
-        offsetId: {
-            type: Sequelize.INTEGER,
+        z: {
+            type: Sequelize.FLOAT,
         }
     });
 
-    return Box;
+    return Rotate;
 };
