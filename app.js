@@ -1,16 +1,24 @@
 const express = require("express");
-const app = express();
+var path = require('path');
 const db = require("./models");
-const initRoutes = require("./routes/tutorial.route");
+var indexRouter = require('./routes/index');
+
+const app = express();
 
 global.__basedir = __dirname + "/..";
 
-app.use(express.urlencoded({ extended: true }));
-initRoutes(app);
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-// db.sequelize.sync();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+
 db.sequelize.sync().then(() => {
-    console.log("Drop and re-sync db.");
+    console.log("Database is synced.");
 });
 
 let port = 8080;
