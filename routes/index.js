@@ -21,8 +21,4 @@ router.get('/login', function (req, res, next) {
     res.render('login', { title: 'login' });
 });
 
-router.get('/*', function (req, res, next) {
-    res.render('error', { title: 'error' });
-});
-
 module.exports = router;
