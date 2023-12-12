@@ -224,6 +224,31 @@
                 })
                 .catch(console.error);
 
+            function createMiddleBuilding(pt) {
+                const middleBuildingLocation = movePoint(pt, (c - g) / 2 + i / 2, -43 - 90);
+                const building = Mesh.createBox(middleBuildingLocation, {
+                    size: {
+                        width: l - 2 * j,
+                        height: 25,
+                        depth: i + o - 3,
+                    }
+                });
+
+                building.rotate(0, 0, -43);
+
+                return building;
+            }
+
+            const middleBuilding = new Graphic({
+                geometry: createMiddleBuilding(DDL_location),
+                symbol: {
+                    type: 'mesh-3d',
+                    symbolLayers: [{ type: 'fill' }],
+                },
+            });
+
+            view.graphics.add(middleBuilding);
+
             //Click copy tọa độ
             view.on('click', function (event) {
                 view.hitTest(event).then(function (hitTestResults) {
