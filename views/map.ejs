@@ -39,11 +39,11 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css" />
     <script src="https://js.arcgis.com/4.28/"></script>
 
-    <script>
+    <script type='text/javascript'>
         // Khai báo biến click copy lấy tọa độ
         var map;
-        var list_points = [];
-        var string_points = '';
+        var list_points=[];
+        var string_points='';
 
         // hàm click lấy copy tọa độ
         function copyTextToClipboard(text) {
@@ -91,29 +91,31 @@
             DistanceParameters,
             meshUtils
         ) {
-            const a = 86.19609697819396;
-            const b = 35.777078869019;
-            const c = 29.373043461846656;
-            const d = 14.893092119035835;
-            const e = 5.362867866395603;
-            const f = 13.196519450343406;
-            const g = 4.669535492104023;
-            const h = 19.326979335433652;
-            const i = 21.470659471369636;
-            const j = 4.662351792212651;
-            const k = 31.106531103747145;
-            const l = 32.64048964664293;
-            const m = 10.77580050922984;
-            const n = 10.94537832397216;
-            const o = 15.35567862550349;
+            var data=JSON.parse(JSON.stringify(<%- data%>));
+            console.log(data);
+            const a=86.19609697819396;
+            const b=35.777078869019;
+            const c=29.373043461846656;
+            const d=14.893092119035835;
+            const e=5.362867866395603;
+            const f=13.196519450343406;
+            const g=4.669535492104023;
+            const h=19.326979335433652;
+            const i=21.470659471369636;
+            const j=4.662351792212651;
+            const k=31.106531103747145;
+            const l=32.64048964664293;
+            const m=10.77580050922984;
+            const n=10.94537832397216;
+            const o=15.35567862550349;
 
-            const map = new Map({
+            const map=new Map({
                 basemap: 'topo-vector',
                 ground: 'world-elevation',
                 layers: [],
             });
 
-            const view = new SceneView({
+            const view=new SceneView({
                 container: 'viewDiv',
                 map: map,
                 camera: {
@@ -124,39 +126,47 @@
                 zoom: 100,
             });
 
-            const DDL_location = new Point({ x: 106.69546012873347, y: 10.777092119827023, z: 15 });
+            const DDL_location=new Point({
+                x: 106.69546012873347,
+                y: 10.777092119827023,
+                z: 15
+            });
 
             function movePoint(pt, distance, angle) {
                 //rayon of the earth
-                const R = 6371e3;
+                const R=6371e3;
                 // latitude in rad
-                let lat1 = (pt.latitude * Math.PI) / 180;
+                let lat1=(pt.latitude*Math.PI)/180;
                 // longitude in rad
-                let long1 = (pt.longitude * Math.PI) / 180;
+                let long1=(pt.longitude*Math.PI)/180;
                 // the angle between the 2 points in rad
-                angle = ((90 - angle) * Math.PI) / 180;
-                const sigma = distance / R;
-                const delLat = sigma * Math.cos(angle);
+                angle=((90-angle)*Math.PI)/180;
+                const sigma=distance/R;
+                const delLat=sigma*Math.cos(angle);
                 //latitude of the destination point
-                let lat2 = ((lat1 + delLat) * 180) / Math.PI;
-                const del = Math.log(Math.tan(lat2 / 2 + Math.PI / 4) / Math.tan(lat1 / 2 + Math.PI / 4));
-                const q = Math.cos(lat1);
+                let lat2=((lat1+delLat)*180)/Math.PI;
+                const del=Math.log(Math.tan(lat2/2+Math.PI/4)/Math.tan(lat1/2+Math.PI/4));
+                const q=Math.cos(lat1);
 
-                const delLong = (sigma * Math.sin(angle)) / q;
+                const delLong=(sigma*Math.sin(angle))/q;
                 //longitude of the destination point
-                let long2 = ((long1 + delLong) * 180) / Math.PI;
+                let long2=((long1+delLong)*180)/Math.PI;
 
-                return new Point({ x: long2, y: lat2, z: pt.z });
+                return new Point({
+                    x: long2,
+                    y: lat2,
+                    z: pt.z
+                });
             }
 
             //Hiển thị thông tin chi tiết của Dinh Độc Lập
-            view.popup.defaultPopupTemplateEnabled = true;
+            view.popup.defaultPopupTemplateEnabled=true;
 
             fetch('./data/tree_corr.json')
                 .then((response) => response.json())
                 .then((json) => {
                     for (var corr in json) {
-                        const tree_loc = new Point({
+                        const tree_loc=new Point({
                             x: json[corr][0],
                             y: json[corr][1],
                             z: 15,
@@ -165,23 +175,23 @@
                         Mesh.createFromGLTF(tree_loc, './Model/Tree/Tree.glb') //Thêm tượng demo
                             .then(function (geometry) {
                                 // increase it a factor of 3
-                                geometry.scale(5, { origin: tree_loc });
+                                geometry.scale(5, {
+                                    origin: tree_loc
+                                });
                                 // rotate it by 90 degrees around the z axis
                                 geometry.rotate(0, 0, 114);
                                 // add it to a graphic
-                                const graphic = new Graphic({
+                                const graphic=new Graphic({
                                     geometry,
                                     symbol: {
                                         type: 'mesh-3d', // autocasts as new MeshSymbol3D()
-                                        symbolLayers: [
-                                            {
-                                                type: 'fill', // autocasts as new FillSymbol3DLayer()
-                                                material: {
-                                                    //color: "gray"
-                                                },
-                                                size: 1000,
+                                        symbolLayers: [{
+                                            type: 'fill', // autocasts as new FillSymbol3DLayer()
+                                            material: {
+                                                //color: "gray"
                                             },
-                                        ],
+                                            size: 1000,
+                                        },],
                                     },
                                 });
 
@@ -191,7 +201,7 @@
                     }
                 });
 
-            const fountain_loc = new Point({
+            const fountain_loc=new Point({
                 x: 106.69596145527656,
                 y: 10.777612314732947,
                 z: 16,
@@ -200,23 +210,23 @@
             Mesh.createFromGLTF(fountain_loc, './Model/Fountain/Fountain.gltf') //Thêm tượng demo
                 .then(function (geometry) {
                     // increase it a factor of 3
-                    geometry.scale(0.5, { origin: fountain_loc });
+                    geometry.scale(0.5, {
+                        origin: fountain_loc
+                    });
                     // rotate it by 90 degrees around the z axis
                     geometry.rotate(0, 0, 114);
                     // add it to a graphic
-                    const graphic = new Graphic({
+                    const graphic=new Graphic({
                         geometry,
                         symbol: {
                             type: 'mesh-3d', // autocasts as new MeshSymbol3D()
-                            symbolLayers: [
-                                {
-                                    type: 'fill', // autocasts as new FillSymbol3DLayer()
-                                    material: {
-                                        //color: "gray"
-                                    },
-                                    size: 1000,
+                            symbolLayers: [{
+                                type: 'fill', // autocasts as new FillSymbol3DLayer()
+                                material: {
+                                    //color: "gray"
                                 },
-                            ],
+                                size: 1000,
+                            },],
                         },
                     });
 
@@ -225,12 +235,12 @@
                 .catch(console.error);
 
             function createMiddleBuilding(pt) {
-                const middleBuildingLocation = movePoint(pt, (c - g) / 2 + i / 2, -43 - 90);
-                const building = Mesh.createBox(middleBuildingLocation, {
+                const middleBuildingLocation=movePoint(pt, (c-g)/2+i/2, -43-90);
+                const building=Mesh.createBox(middleBuildingLocation, {
                     size: {
-                        width: l - 2 * j,
+                        width: l-2*j,
                         height: 25,
-                        depth: i + o - 3,
+                        depth: i+o-3,
                     }
                 });
 
@@ -239,11 +249,13 @@
                 return building;
             }
 
-            const middleBuilding = new Graphic({
+            const middleBuilding=new Graphic({
                 geometry: createMiddleBuilding(DDL_location),
                 symbol: {
                     type: 'mesh-3d',
-                    symbolLayers: [{ type: 'fill' }],
+                    symbolLayers: [{
+                        type: 'fill'
+                    }],
                 },
             });
 
@@ -254,7 +266,7 @@
                 view.hitTest(event).then(function (hitTestResults) {
                     if (hitTestResults.results) {
                         list_points.push([event.mapPoint.longitude, event.mapPoint.latitude]);
-                        string_points = '[' + event.mapPoint.longitude + ', ' + event.mapPoint.latitude + ']';
+                        string_points='['+event.mapPoint.longitude+', '+event.mapPoint.latitude+']';
                         copyTextToClipboard(string_points);
                     }
                 });
