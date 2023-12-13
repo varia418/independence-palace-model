@@ -332,6 +332,37 @@
                 view.graphics.add(componentGraphic);
             });
 
+
+            function createPreviewBlock() {
+                const previewLocation=new Point({
+                    x: 106.69596145527656,
+                    y: 10.777612314732947,
+                    z: 16,
+                });
+
+
+                const block=Mesh.createBox(previewLocation, {
+                    size: {
+                        width: l-2*j,
+                        height: 25,
+                        depth: i+o-3,
+                    }
+                });
+
+                block.rotate(0, 0, -43);
+
+                let graphic=new Graphic({
+                    geometry: block,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{ type: 'fill' }],
+                    },
+                });
+                view.graphics.add(graphic);
+            }
+            createPreviewBlock();
+
+
             //Click copy tọa độ
             view.on('click', function (event) {
                 view.hitTest(event).then(function (hitTestResults) {
