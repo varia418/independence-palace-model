@@ -13,12 +13,6 @@ module.exports = (sequelize, Sequelize) => {
         },
         description: {
             type: Sequelize.STRING
-        },
-        rotateId: {
-            type: Sequelize.INTEGER,
-        },
-        offsetId: {
-            type: Sequelize.INTEGER,
         }
     });
 
