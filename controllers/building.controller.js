@@ -1,4 +1,5 @@
 const db=require("../models");
+const BuildingComponent=db.buildingComponent;
 const Box=db.box;
 const Location=db.location;
 const Size=db.size;
@@ -7,11 +8,8 @@ const Offset=db.offset;
 
 const renderDDL=async (req, res) => {
     try {
-        const boxes=await Box.findAll({ include: { all: true } });
-        const data={
-            boxes
-        }
-        res.render('map', { data: JSON.stringify(data) });
+        const components=await BuildingComponent.findAll({ include: { all: true } });
+        res.render('map', { data: JSON.stringify(components) });
     } catch (error) {
         res.status(500).send({
             message:
