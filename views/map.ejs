@@ -234,32 +234,103 @@
                 })
                 .catch(console.error);
 
-            function createMiddleBuilding(pt) {
-                const middleBuildingLocation=movePoint(pt, (c-g)/2+i/2, -43-90);
-                const building=Mesh.createBox(middleBuildingLocation, {
-                    size: {
-                        width: l-2*j,
-                        height: 25,
-                        depth: i+o-3,
-                    }
+
+            data.forEach(component => {
+                const boxes=[];
+                const cylinders=[];
+                const spheres=[];
+                const planes=[];
+
+                if (component.boxes.length>0) {
+                    component.boxes.forEach(box => {
+                        const location=new Point(box.location.x, box.location.y, box.location.z);
+                        const geometry=Mesh.createBox(location, {
+                            size: {
+                                width: box.size.width,
+                                height: box.size.height,
+                                depth: box.size.depth,
+                            }
+                        });
+
+                        if (box.rotate) {
+                            geometry.rotate(box.rotate.x, box.rotate.y, box.rotate.z);
+                        }
+
+                        boxes.push(geometry);
+                    });
+                }
+                if (component.cylinders.length>0) {
+                    component.cylinders.forEach(cylinder => {
+                        const location=new Point(cylinder.location.x, cylinder.location.y, cylinder.location.z);
+                        const geometry=Mesh.createBox(location, {
+                            size: {
+                                width: cylinder.size.width,
+                                height: cylinder.size.height,
+                                depth: cylinder.size.depth,
+                            }
+                        });
+
+                        if (cylinder.rotate) {
+                            geometry.rotate(cylinder.rotate.x, cylinder.rotate.y, cylinder.rotate.z);
+                        }
+
+                        cylinders.push(geometry);
+                    });
+                }
+                if (component.spheres.length>0) {
+                    component.spheres.forEach(sphere => {
+                        const location=new Point(sphere.location.x, sphere.location.y, sphere.location.z);
+                        const geometry=Mesh.createBox(location, {
+                            size: {
+                                width: sphere.size.width,
+                                height: sphere.size.height,
+                                depth: sphere.size.depth,
+                            }
+                        });
+
+                        if (sphere.rotate) {
+                            geometry.rotate(sphere.rotate.x, sphere.rotate.y, sphere.rotate.z);
+                        }
+
+                        spheres.push(geometry);
+                    });
+                }
+                if (component.planes.length>0) {
+                    component.planes.forEach(plane => {
+                        const location=new Point(plane.location.x, plane.location.y, plane.location.z);
+                        const geometry=Mesh.createBox(location, {
+                            size: {
+                                width: plane.size.width,
+                                height: plane.size.height,
+                                depth: plane.size.depth,
+                            }
+                        });
+
+                        if (plane.rotate) {
+                            geometry.rotate(plane.rotate.x, plane.rotate.y, plane.rotate.z);
+                        }
+
+                        planes.push(geometry);
+                    });
+                }
+
+                const componentGeometry=meshUtils.merge([].concat(boxes, cylinders, spheres, planes));
+                if (component.rotate) {
+                    componentGeometry.rotate(component.rotate.x, component.rotate.y, component.rotate.z);
+                }
+
+                const componentGraphic=new Graphic({
+                    geometry: componentGeometry,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{
+                            type: 'fill'
+                        }],
+                    },
                 });
 
-                building.rotate(0, 0, -43);
-
-                return building;
-            }
-
-            const middleBuilding=new Graphic({
-                geometry: createMiddleBuilding(DDL_location),
-                symbol: {
-                    type: 'mesh-3d',
-                    symbolLayers: [{
-                        type: 'fill'
-                    }],
-                },
+                view.graphics.add(componentGraphic);
             });
-
-            view.graphics.add(middleBuilding);
 
             //Click copy tọa độ
             view.on('click', function (event) {
