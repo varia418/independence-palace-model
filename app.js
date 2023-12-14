@@ -36,9 +36,9 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-db.sequelize.sync().then(() => {
-    console.log("Database is synced.");
-});
+// db.sequelize.sync().then(() => {
+//     console.log("Database is synced.");
+// });
 
 let port=8080;
 app.listen(port, () => {
