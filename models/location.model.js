@@ -6,15 +6,15 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         x: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.DOUBLE,
             allowNull: false
         },
         y: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.DOUBLE,
             allowNull: false
         },
         z: {
-            type: Sequelize.FLOAT,
+            type: Sequelize.DOUBLE,
             allowNull: false
         }
     });
