@@ -42,8 +42,8 @@
     <script type='text/javascript'>
         // Khai báo biến click copy lấy tọa độ
         var map;
-        var list_points=[];
-        var string_points='';
+        var list_points = [];
+        var string_points = '';
 
         // hàm click lấy copy tọa độ
         function copyTextToClipboard(text) {
@@ -91,31 +91,31 @@
             DistanceParameters,
             meshUtils
         ) {
-            var data=JSON.parse(JSON.stringify(<%- data%>));
+            const data = JSON.parse(JSON.stringify(<%- data %>));
             console.log(data);
-            const a=86.19609697819396;
-            const b=35.777078869019;
-            const c=29.373043461846656;
-            const d=14.893092119035835;
-            const e=5.362867866395603;
-            const f=13.196519450343406;
-            const g=4.669535492104023;
-            const h=19.326979335433652;
-            const i=21.470659471369636;
-            const j=4.662351792212651;
-            const k=31.106531103747145;
-            const l=32.64048964664293;
-            const m=10.77580050922984;
-            const n=10.94537832397216;
-            const o=15.35567862550349;
+            const a = 86.19609697819396;
+            const b = 35.777078869019;
+            const c = 29.373043461846656;
+            const d = 14.893092119035835;
+            const e = 5.362867866395603;
+            const f = 13.196519450343406;
+            const g = 4.669535492104023;
+            const h = 19.326979335433652;
+            const i = 21.470659471369636;
+            const j = 4.662351792212651;
+            const k = 31.106531103747145;
+            const l = 32.64048964664293;
+            const m = 10.77580050922984;
+            const n = 10.94537832397216;
+            const o = 15.35567862550349;
 
-            const map=new Map({
+            const map = new Map({
                 basemap: 'topo-vector',
                 ground: 'world-elevation',
                 layers: [],
             });
 
-            const view=new SceneView({
+            const view = new SceneView({
                 container: 'viewDiv',
                 map: map,
                 camera: {
@@ -126,7 +126,7 @@
                 zoom: 100,
             });
 
-            const DDL_location=new Point({
+            const DDL_location = new Point({
                 x: 106.69546012873347,
                 y: 10.777092119827023,
                 z: 15
@@ -134,23 +134,23 @@
 
             function movePoint(pt, distance, angle) {
                 //rayon of the earth
-                const R=6371e3;
+                const R = 6371e3;
                 // latitude in rad
-                let lat1=(pt.latitude*Math.PI)/180;
+                let lat1 = (pt.latitude * Math.PI) / 180;
                 // longitude in rad
-                let long1=(pt.longitude*Math.PI)/180;
+                let long1 = (pt.longitude * Math.PI) / 180;
                 // the angle between the 2 points in rad
-                angle=((90-angle)*Math.PI)/180;
-                const sigma=distance/R;
-                const delLat=sigma*Math.cos(angle);
+                angle = ((90 - angle) * Math.PI) / 180;
+                const sigma = distance / R;
+                const delLat = sigma * Math.cos(angle);
                 //latitude of the destination point
-                let lat2=((lat1+delLat)*180)/Math.PI;
-                const del=Math.log(Math.tan(lat2/2+Math.PI/4)/Math.tan(lat1/2+Math.PI/4));
-                const q=Math.cos(lat1);
+                let lat2 = ((lat1 + delLat) * 180) / Math.PI;
+                const del = Math.log(Math.tan(lat2 / 2 + Math.PI / 4) / Math.tan(lat1 / 2 + Math.PI / 4));
+                const q = Math.cos(lat1);
 
-                const delLong=(sigma*Math.sin(angle))/q;
+                const delLong = (sigma * Math.sin(angle)) / q;
                 //longitude of the destination point
-                let long2=((long1+delLong)*180)/Math.PI;
+                let long2 = ((long1 + delLong) * 180) / Math.PI;
 
                 return new Point({
                     x: long2,
@@ -160,13 +160,13 @@
             }
 
             //Hiển thị thông tin chi tiết của Dinh Độc Lập
-            view.popup.defaultPopupTemplateEnabled=true;
+            view.popup.defaultPopupTemplateEnabled = true;
 
             fetch('./data/tree_corr.json')
                 .then((response) => response.json())
                 .then((json) => {
                     for (var corr in json) {
-                        const tree_loc=new Point({
+                        const tree_loc = new Point({
                             x: json[corr][0],
                             y: json[corr][1],
                             z: 15,
@@ -181,7 +181,7 @@
                                 // rotate it by 90 degrees around the z axis
                                 geometry.rotate(0, 0, 114);
                                 // add it to a graphic
-                                const graphic=new Graphic({
+                                const graphic = new Graphic({
                                     geometry,
                                     symbol: {
                                         type: 'mesh-3d', // autocasts as new MeshSymbol3D()
@@ -201,7 +201,7 @@
                     }
                 });
 
-            const fountain_loc=new Point({
+            const fountain_loc = new Point({
                 x: 106.69596145527656,
                 y: 10.777612314732947,
                 z: 16,
@@ -216,7 +216,7 @@
                     // rotate it by 90 degrees around the z axis
                     geometry.rotate(0, 0, 114);
                     // add it to a graphic
-                    const graphic=new Graphic({
+                    const graphic = new Graphic({
                         geometry,
                         symbol: {
                             type: 'mesh-3d', // autocasts as new MeshSymbol3D()
@@ -236,15 +236,15 @@
 
 
             data.forEach(component => {
-                const boxes=[];
-                const cylinders=[];
-                const spheres=[];
-                const planes=[];
+                const boxes = [];
+                const cylinders = [];
+                const spheres = [];
+                const planes = [];
 
-                if (component.boxes.length>0) {
+                if (component.boxes.length > 0) {
                     component.boxes.forEach(box => {
-                        const location=new Point(box.location.x, box.location.y, box.location.z);
-                        const geometry=Mesh.createBox(location, {
+                        const location = new Point(box.location.x, box.location.y, box.location.z);
+                        const geometry = Mesh.createBox(location, {
                             size: {
                                 width: box.size.width,
                                 height: box.size.height,
@@ -262,10 +262,10 @@
                         boxes.push(geometry);
                     });
                 }
-                if (component.cylinders.length>0) {
+                if (component.cylinders.length > 0) {
                     component.cylinders.forEach(cylinder => {
-                        const location=new Point(cylinder.location.x, cylinder.location.y, cylinder.location.z);
-                        const geometry=Mesh.createBox(location, {
+                        const location = new Point(cylinder.location.x, cylinder.location.y, cylinder.location.z);
+                        const geometry = Mesh.createBox(location, {
                             size: {
                                 width: cylinder.size.width,
                                 height: cylinder.size.height,
@@ -283,10 +283,10 @@
                         cylinders.push(geometry);
                     });
                 }
-                if (component.spheres.length>0) {
+                if (component.spheres.length > 0) {
                     component.spheres.forEach(sphere => {
-                        const location=new Point(sphere.location.x, sphere.location.y, sphere.location.z);
-                        const geometry=Mesh.createBox(location, {
+                        const location = new Point(sphere.location.x, sphere.location.y, sphere.location.z);
+                        const geometry = Mesh.createBox(location, {
                             size: {
                                 width: sphere.size.width,
                                 height: sphere.size.height,
@@ -304,10 +304,10 @@
                         spheres.push(geometry);
                     });
                 }
-                if (component.planes.length>0) {
+                if (component.planes.length > 0) {
                     component.planes.forEach(plane => {
-                        const location=new Point(plane.location.x, plane.location.y, plane.location.z);
-                        const geometry=Mesh.createBox(location, {
+                        const location = new Point(plane.location.x, plane.location.y, plane.location.z);
+                        const geometry = Mesh.createBox(location, {
                             size: {
                                 width: plane.size.width,
                                 height: plane.size.height,
@@ -326,12 +326,12 @@
                     });
                 }
 
-                const componentGeometry=meshUtils.merge([].concat(boxes, cylinders, spheres, planes));
+                const componentGeometry = meshUtils.merge([].concat(boxes, cylinders, spheres, planes));
                 if (component.rotate) {
                     componentGeometry.rotate(component.rotate.x, component.rotate.y, component.rotate.z);
                 }
 
-                const componentGraphic=new Graphic({
+                const componentGraphic = new Graphic({
                     geometry: componentGeometry,
                     symbol: {
                         type: 'mesh-3d',
@@ -344,26 +344,29 @@
                 view.graphics.add(componentGraphic);
             });
 
-
+            // window color: #7daebd
             function createPreviewBlock() {
-                const previewLocation=new Point({
+                const previewLocation = new Point({
                     x: 106.69596145527656,
                     y: 10.777612314732947,
                     z: 16,
                 });
 
 
-                const block=Mesh.createBox(previewLocation, {
+                const block = Mesh.createBox(previewLocation, {
                     size: {
-                        width: l-2*j,
+                        width: l - 2 * j,
                         height: 25,
-                        depth: i+o-3,
+                        depth: i + o - 3,
+                    },
+                    material: {
+                        color: '#fff',
                     }
                 });
 
                 block.rotate(0, 0, -43);
 
-                let graphic=new Graphic({
+                let graphic = new Graphic({
                     geometry: block,
                     symbol: {
                         type: 'mesh-3d',
@@ -380,7 +383,7 @@
                 view.hitTest(event).then(function (hitTestResults) {
                     if (hitTestResults.results) {
                         list_points.push([event.mapPoint.longitude, event.mapPoint.latitude]);
-                        string_points='['+event.mapPoint.longitude+', '+event.mapPoint.latitude+']';
+                        string_points = '[' + event.mapPoint.longitude + ', ' + event.mapPoint.latitude + ']';
                         copyTextToClipboard(string_points);
                     }
                 });
