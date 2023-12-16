@@ -259,6 +259,10 @@
                             geometry.rotate(box.rotate.x, box.rotate.y, box.rotate.z);
                         }
 
+                        if (box.offset) {
+                            geometry.offset(box.offset.x, box.offset.y, box.offset.z);
+                        }
+
                         boxes.push(geometry);
                     });
                 }
@@ -278,6 +282,10 @@
 
                         if (cylinder.rotate) {
                             geometry.rotate(cylinder.rotate.x, cylinder.rotate.y, cylinder.rotate.z);
+                        }
+
+                        if (cylinder.offset) {
+                            geometry.offset(cylinder.offset.x, cylinder.offset.y, cylinder.offset.z);
                         }
 
                         cylinders.push(geometry);
@@ -301,6 +309,10 @@
                             geometry.rotate(sphere.rotate.x, sphere.rotate.y, sphere.rotate.z);
                         }
 
+                        if (sphere.offset) {
+                            geometry.offset(sphere.offset.x, sphere.offset.y, sphere.offset.z);
+                        }
+
                         spheres.push(geometry);
                     });
                 }
@@ -322,13 +334,22 @@
                             geometry.rotate(plane.rotate.x, plane.rotate.y, plane.rotate.z);
                         }
 
+                        if (plane.offset) {
+                            geometry.offset(plane.offset.x, plane.offset.y, plane.offset.z);
+                        }
+
                         planes.push(geometry);
                     });
                 }
 
                 const componentGeometry = meshUtils.merge([].concat(boxes, cylinders, spheres, planes));
+
                 if (component.rotate) {
                     componentGeometry.rotate(component.rotate.x, component.rotate.y, component.rotate.z);
+                }
+
+                if (component.offset) {
+                    componentGeometry.offset(component.offset.x, component.offset.y, component.offset.z);
                 }
 
                 const componentGraphic = new Graphic({
