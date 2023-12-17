@@ -367,36 +367,210 @@
 
             // window color: #7daebd
             function createPreviewBlock() {
-                const previewLocation = new Point({
+                const boxLocation1 = new Point({
                     x: 106.69596145527656,
                     y: 10.777612314732947,
-                    z: 16,
+                    z: 20,
                 });
-
-
-                const block = Mesh.createBox(previewLocation, {
+                const sphereLocation1 = new Point({
+                    x: 106.69596145527656,
+                    y: 10.777612314732947,
+                    z: 20,
+                });
+                const cylinderLocation1 = new Point({
+                    x: 106.69596145527656,
+                    y: 10.777612314732947,
+                    z: 20.4,
+                });
+                const sphereLocation2 = new Point({
+                    x: 106.69596145527656,
+                    y: 10.777612314732947,
+                    z: 20.75,
+                });
+                const cylinderLocation2 = new Point({
+                    x: 106.69596145527656,
+                    y: 10.777612314732947,
+                    z: 21.15,
+                });
+                const sphereLocation3 = new Point({
+                    x: 106.69596145527656,
+                    y: 10.777612314732947,
+                    z: 21.5,
+                });
+                const cylinderLocation3 = new Point({
+                    x: 106.69596145527656,
+                    y: 10.777612314732947,
+                    z: 21.9,
+                });
+                const sphereLocation4 = new Point({
+                    x: 106.69596145527656,
+                    y: 10.777612314732947,
+                    z: 22.25,
+                });
+                const boxLocation2 = new Point({
+                    x: 106.69596145527656,
+                    y: 10.777612314732947,
+                    z: 22.5,
+                });
+                
+                const sphere1 = Mesh.createSphere(sphereLocation1, {
                     size: {
-                        width: l - 2 * j,
-                        height: 25,
-                        depth: i + o - 3,
+                        width: 0.4,
+                        height: 0.5,
+                        depth: 0.1,
+                    },
+                    material: {
+                        color: '#fff',
+                    }
+                });
+                const sphere2 = Mesh.createSphere(sphereLocation2, {
+                    size: {
+                        width: 0.4,
+                        height: 0.5,
+                        depth: 0.1,
+                    },
+                    material: {
+                        color: '#fff',
+                    }
+                });
+                const sphere3 = Mesh.createSphere(sphereLocation3, {
+                    size: {
+                        width: 0.4,
+                        height: 0.5,
+                        depth: 0.1,
+                    },
+                    material: {
+                        color: '#fff',
+                    }
+                });
+                const sphere4 = Mesh.createSphere(sphereLocation4, {
+                    size: {
+                        width: 0.4,
+                        height: 0.5,
+                        depth: 0.1,
+                    },
+                    material: {
+                        color: '#fff',
+                    }
+                });
+                const cylinder1 = Mesh.createCylinder(cylinderLocation1, {
+                    size: {
+                        width: 0.2,
+                        height: 0.45,
+                        depth: 0.1,
+                    },
+                    material: {
+                        color: '#fff',
+                    }
+                });
+                const cylinder2 = Mesh.createCylinder(cylinderLocation2, {
+                    size: {
+                        width: 0.2,
+                        height: 0.45,
+                        depth: 0.1,
+                    },
+                    material: {
+                        color: '#fff',
+                    }
+                });
+                const cylinder3 = Mesh.createCylinder(cylinderLocation3, {
+                    size: {
+                        width: 0.2,
+                        height: 0.45,
+                        depth: 0.1,
+                    },
+                    material: {
+                        color: '#fff',
+                    }
+                });
+                const box1 = Mesh.createBox(boxLocation1, {
+                    size: {
+                        width: 5,
+                        height: 0.25,
+                        depth: 0.1,
+                    },
+                    material: {
+                        color: '#fff',
+                    }
+                });
+                const box2 = Mesh.createBox(boxLocation2, {
+                    size: {
+                        width: 5,
+                        height: 0.25,
+                        depth: 0.1,
                     },
                     material: {
                         color: '#fff',
                     }
                 });
 
-                block.rotate(0, 0, -43);
 
-                let graphic = new Graphic({
-                    geometry: block,
+                let graphic1 = new Graphic({
+                    geometry: sphere1,
                     symbol: {
                         type: 'mesh-3d',
                         symbolLayers: [{ type: 'fill' }],
                     },
                 });
-                view.graphics.add(graphic);
+                let graphic2 = new Graphic({
+                    geometry: cylinder1,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{ type: 'fill' }],
+                    },
+                });
+                let graphic3 = new Graphic({
+                    geometry: sphere2,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{ type: 'fill' }],
+                    },
+                });
+                let graphic4 = new Graphic({
+                    geometry: cylinder2,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{ type: 'fill' }],
+                    },
+                });
+                let graphic5 = new Graphic({
+                    geometry: sphere3,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{ type: 'fill' }],
+                    },
+                });
+                let graphic6 = new Graphic({
+                    geometry: cylinder3,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{ type: 'fill' }],
+                    },
+                });
+                let graphic7 = new Graphic({
+                    geometry: sphere4,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{ type: 'fill' }],
+                    },
+                });
+                let graphic8 = new Graphic({
+                    geometry: box1,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{ type: 'fill' }],
+                    },
+                });
+                let graphic9 = new Graphic({
+                    geometry: box2,
+                    symbol: {
+                        type: 'mesh-3d',
+                        symbolLayers: [{ type: 'fill' }],
+                    },
+                });
+                view.graphics.addMany([graphic1, graphic2, graphic3, graphic4, graphic5, graphic6, graphic7, graphic8, graphic9]);
             }
-            // createPreviewBlock();
+            createPreviewBlock();
 
 
             //Click copy tọa độ
