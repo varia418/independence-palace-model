@@ -43,11 +43,13 @@ fs
 
 
 db.box.belongsTo(db.location);
+db.pyramid.belongsTo(db.location);
 db.cylinder.belongsTo(db.location);
 db.sphere.belongsTo(db.location);
 db.plane.belongsTo(db.location);
 
 db.box.belongsTo(db.size);
+db.pyramid.belongsTo(db.size);
 db.cylinder.belongsTo(db.size);
 db.sphere.belongsTo(db.size);
 db.plane.belongsTo(db.size);
@@ -55,6 +57,7 @@ db.plane.belongsTo(db.size);
 db.building.belongsTo(db.rotate);
 db.buildingComponent.belongsTo(db.rotate);
 db.box.belongsTo(db.rotate);
+db.pyramid.belongsTo(db.rotate);
 db.cylinder.belongsTo(db.rotate);
 db.sphere.belongsTo(db.rotate);
 db.plane.belongsTo(db.rotate);
@@ -62,11 +65,13 @@ db.plane.belongsTo(db.rotate);
 db.building.belongsTo(db.offset);
 db.buildingComponent.belongsTo(db.offset);
 db.box.belongsTo(db.offset);
+db.pyramid.belongsTo(db.offset);
 db.cylinder.belongsTo(db.offset);
 db.sphere.belongsTo(db.offset);
 db.plane.belongsTo(db.offset);
 
 db.box.belongsTo(db.buildingComponent);
+db.pyramid.belongsTo(db.buildingComponent);
 db.cylinder.belongsTo(db.buildingComponent);
 db.sphere.belongsTo(db.buildingComponent);
 db.plane.belongsTo(db.buildingComponent);
