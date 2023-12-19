@@ -163,27 +163,36 @@
                 const height = params.size.height;
                 const halfWidth = params.size.width / 2;
                 const halfDepth = params.size.depth / 2;
+                const hypotenuse = Math.sqrt(
+                    Math.pow(halfWidth, 2) + Math.pow(halfDepth, 2)
+                );
+
+                const vertexA = { x: pt.x, y: pt.y, z: pt.z + height };
+                const vertexB = movePoint(pt, hypotenuse, -45);
+                const vertexC = movePoint(pt, hypotenuse, 45);
+                const vertexD = movePoint(pt, hypotenuse, 135);
+                const vertexE = movePoint(pt, hypotenuse, -135);
 
                 // Vertex locations that make up the pyramid,
                 // the first triple represents the top of the pyramid,
                 // while the remaining 4 triples represent the base
                 // of the pyramid
                 const position = [
-                    pt.x,
-                    pt.y,
-                    pt.z + height,
-                    pt.x - halfWidth,
-                    pt.y - halfDepth,
-                    pt.z,
-                    pt.x + halfWidth,
-                    pt.y - halfDepth,
-                    pt.z,
-                    pt.x + halfWidth,
-                    pt.y + halfDepth,
-                    pt.z,
-                    pt.x - halfWidth,
-                    pt.y + halfDepth,
-                    pt.z
+                    vertexA.x,
+                    vertexA.y,
+                    vertexA.z,
+                    vertexB.x,
+                    vertexB.y,
+                    vertexB.z,
+                    vertexC.x,
+                    vertexC.y,
+                    vertexC.z,
+                    vertexD.x,
+                    vertexD.y,
+                    vertexD.z,
+                    vertexE.x,
+                    vertexE.y,
+                    vertexE.z,
                 ];
 
                 // The UV coordinates will be used to map an
