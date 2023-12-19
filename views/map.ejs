@@ -433,7 +433,7 @@
                     });
                 }
 
-                const componentGeometry = meshUtils.merge([].concat(boxes, cylinders, spheres, planes));
+                const componentGeometry = meshUtils.merge([].concat(boxes, pyramids, cylinders, spheres, planes));
 
                 if (component.rotate) {
                     componentGeometry.rotate(component.rotate.x, component.rotate.y, component.rotate.z);
