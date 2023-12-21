@@ -85,7 +85,39 @@ const createGeometry=async (req, res) => {
     }
 }
 
+const updateGeometry=async (req, res) => {
+    try {
+        const {type, description, color, location, size, rotate, offset} = req.body;
+        const {id} = req.params;
+        const data = {description, color}
+        if (location) {
+            const _location = await Location.create({x: location.x, y: location.y, z: location.z});
+            data.locationId = _location.id;
+        }
+        if (size) {
+            const _size = await Size.create({width: size.width, height: size.height, depth: size.depth});
+            data.sizeId = _size.id;
+        }
+        if (rotate) {
+            const _rotate = await Rotate.create({x: rotate.x, y: rotate.y, z: rotate.z});
+            data.rotateId = _rotate.id;
+        }
+        if (offset) {
+            const _offset = await Offset.create({x: offset.x, y: offset.y, z: offset.z});
+            data.offsetId = _offset.id;
+        }
+        const geometry = await db[type].update(data, {where: {id}});
+        res.send(`Geometry ${type}-${id} has been updated successfully!`);
+    } catch (error) {
+        res.status(500).send({
+            message:
+                error.message||"Some error occurred while updating the geometry.",
+        });
+    }
+}
+
 module.exports={
     getGeometries,
-    createGeometry
+    createGeometry,
+    updateGeometry
 };
