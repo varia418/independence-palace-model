@@ -442,7 +442,6 @@
                 if (component.offset) {
                     componentGeometry.offset(component.offset.x, component.offset.y, component.offset.z);
                 }
-
                 const componentGraphic = new Graphic({
                     geometry: componentGeometry,
                     symbol: {
@@ -451,6 +450,21 @@
                             type: 'fill'
                         }],
                     },
+                    attributes: component,
+                    popupTemplate: {
+                        title: 'Component Information',
+                        content: [{   
+                            type: "fields",
+                            fieldInfos: [
+                                {
+                                    fieldName: "id"
+                                },
+                                {
+                                    fieldName: "description"
+                                }
+                            ]
+                        }]
+                    }
                 });
 
                 view.graphics.add(componentGraphic);
