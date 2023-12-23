@@ -9,6 +9,7 @@ const Size=db.size;
 const Rotate=db.rotate;
 const Offset=db.offset;
 
+
 const getGeometries=async (req, res) => {
     try {
         let boxes=await Box.findAll({raw : true});
@@ -49,6 +50,19 @@ const getGeometries=async (req, res) => {
         });
 
         const result = [].concat(boxes, pyramids, cylinders, spheres, planes);
+        res.json(result);
+    } catch (error) {
+        res.status(500).send({
+            message:
+                error.message||"Some error occurred while retrieving boxes.",
+        });
+    }
+};
+
+const getGeometry=async (req, res) => {
+    try {
+        const { type, id } = req.params;
+        let result=await db[type].findByPk(id, {include: [{ model: Location }, { model: Size }, { model: Rotate }, { model: Offset }]});
         res.json(result);
     } catch (error) {
         res.status(500).send({
@@ -118,6 +132,7 @@ const updateGeometry=async (req, res) => {
 
 module.exports={
     getGeometries,
+    getGeometry,
     createGeometry,
     updateGeometry
 };
