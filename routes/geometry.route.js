@@ -7,5 +7,6 @@ router.get('/', geometryController.getGeometries);
 router.get('/:type/:id', geometryController.getGeometry);
 router.post('/', geometryController.createGeometry);
 router.put('/:id', geometryController.updateGeometry);
+router.delete('/:id', geometryController.deleteGeometry)
 
 module.exports = router;

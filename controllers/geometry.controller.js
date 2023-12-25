@@ -124,9 +124,32 @@ const updateGeometry=async (req, res) => {
     }
 }
 
+const deleteGeometry = async (req, res) => {
+    try {
+
+        const { id } = req.params;
+        const { type } = req.body;
+        console.log(type)
+        const geometry = await db[type].destroy({ where: { id } });
+        console.log(geometry)
+        if (geometry) {
+            res.send(`Geometry ${type}-${id} has been deleted successfully!`);
+        } else {
+            res.status(404).send({
+                message: `Cannot delete Geometry with id=${id}. Maybe Geometry was not found!`,
+            });
+        }
+    } catch (error) {
+        res.status(500).send({
+            message: error.message || "Some error occurred while deleting the Geometry.",
+        });
+    }
+};
+
 module.exports={
     getGeometries,
     getGeometry,
     createGeometry,
-    updateGeometry
+    updateGeometry,
+    deleteGeometry
 };
